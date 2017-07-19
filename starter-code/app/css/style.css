@@ -51,6 +51,11 @@ form input[type=submit]:hover{
   top: -1px;
 }
 
+#cat-note {
+    position: relative;
+    top: 10px;
+}
+
 ul {
   text-align: left;
   max-width: 300px;
