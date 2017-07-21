@@ -1,11 +1,18 @@
+$('document').ready(function(){
+	execute();
+});
+
+function execute() {
+
 $("body").append("<ul></ul>");
 
 $.ajax ( {
 	url: "https://ga-cat-rescue.herokuapp.com/api/cats", 
 	dataType: 'json',
+	method: 'GET',
 	success: function(data) {
-	   data.forEach( function(l) {
-	   	 $("ul").append("<li>" + l.name + " - " + l.note + "</li>");
+	   data.forEach( function(element) {
+	   	 $("ul").append("<li>" + element.name + " - " + element.note + "</li>");
 	   });
 	}
 });
@@ -14,7 +21,7 @@ $.ajax ( {
 
 
 
-$("form").on("submit", function(event) {
+$("form").submit(function(event) {
 	event.preventDefault();
 	
 	var newCat =  { 
@@ -29,17 +36,17 @@ $("form").on("submit", function(event) {
 	$.ajax ( {
 		url: "https://ga-cat-rescue.herokuapp.com/api/cats", 
 		dataType: 'json', 
-		method: "POST",
+		method: 'POST',
 		data: JSON.stringify(newCat),
-		success: function() {
+		success: function(element) {
 			
-			$(document).load(this.href);
-			$("ul").append("<li>" + newCat + "</li>");
-
-			alert('form was submitted');
-
-			$(document).load(this.href);
-		}
+			
+				$("ul").append("<li>" + element.name + "-" + element.note + "</li>");
+				alert ("your form has been submitted!!!!!");
+			}
+		});
+			
+		
 		
 	});
 	
@@ -47,4 +54,6 @@ $("form").on("submit", function(event) {
 
 
 	 
-});
+
+
+}
